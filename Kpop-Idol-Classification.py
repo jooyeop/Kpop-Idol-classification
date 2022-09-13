@@ -117,19 +117,19 @@ print(len(trainX),len(valX))
 testX,testY = [],[]
 
 for i in range(tnum_total):
-    testX.append(timage_file_list[i])
-    testY.append(timage_label_list[i])
+    testX.append(timage_file_list[i]) # testX에 timage_file_list의 i번째 열을 추가
+    testY.append(timage_label_list[i]) # testY에 timage_label_list의 i번째 열을 추가
 
 print(len(testX))
 print(testY[0:10])
 
 
-trainX=np.array(trainX)
-trainY=np.array(trainY)
-valX=np.array(valX)
-valY=np.array(valY)
-testX=np.array(testX)
-testY=np.array(testY)
+trainX=np.array(trainX) # trainX를 array로 변환
+trainY=np.array(trainY) # trainY를 array로 변환
+valX=np.array(valX) # valX를 array로 변환
+valY=np.array(valY) # valY를 array로 변환
+testX=np.array(testX) # testX를 array로 변환
+testY=np.array(testY) # testY를 array로 변환
 
 # Define MONAI transforms, Dataset and Dataloader to pre-process data == 데이터 전처리를 위한 MONAI 변환, 데이터 세트 및 데이터로더 정의
 class SumDimension(Transform):
@@ -143,7 +143,7 @@ class MyResize(Transform):
     def __init__(self, size=(200,200)):
         self.size = size
     def __call__(self, inputs):
-        image2=cv2.resize(np.array(inputs),dsize=(self.size[1],self.size[0]),interpolation=cv2.INTER_CUBIC)
+        image2=cv2.resize(np.array(inputs),dsize=(self.size[1],self.size[0]),interpolation=cv2.INTER_CUBIC) # image2에 cv2를 이용해 inputs를 resize
         return image2
 
 train_transforms = Compose([
@@ -153,7 +153,7 @@ train_transforms = Compose([
     MyResize(),
     AddChannel(),    
     ToTensor(),
-])
+]) # train_transforms에 Compose를 이용해 LoadImage, Resize, SumDimension, MyResize, AddChannel, ToTensor를 추가
 
 val_transforms = Compose([
     LoadImage(image_only=True),
@@ -162,10 +162,10 @@ val_transforms = Compose([
     MyResize(),
     AddChannel(),    
     ToTensor(),
-])
+]) # val_transforms에 Compose를 이용해 LoadImage, Resize, SumDimension, MyResize, AddChannel, ToTensor를 추가
 
-act = Activations(softmax=True)
-to_onehot = AsDiscrete(to_onehot=num_class)
+act = Activations(softmax=True) # act에 softmax를 추가
+to_onehot = AsDiscrete(to_onehot=num_class) # to_onehot에 AsDiscrete를 이용해 to_onehot을 num_class로 추가
 
 class MedNISTDataset(Dataset):
 
