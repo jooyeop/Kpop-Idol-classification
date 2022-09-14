@@ -175,10 +175,10 @@ class MedNISTDataset(Dataset):
         self.transforms = transforms
 
     def __len__(self):
-        return len(self.image_files)
+        return len(self.image_files) # image_files의 길이를 반환
 
     def __getitem__(self, index):
-        return self.transforms(self.image_files[index]), self.labels[index]
+        return self.transforms(self.image_files[index]), self.labels[index] # transforms를 이용해 image_files의 index번째 열을 반환하고 labels의 index번째 열을 반환
 
 
 train_ds = MedNISTDataset(trainX, trainY, train_transforms)
