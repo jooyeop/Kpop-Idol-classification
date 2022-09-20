@@ -16,8 +16,8 @@ from monai.transforms import *
 from monai.data import Dataset, DataLoader
 from monai.utils import set_determinism
 
-train=pd.read_csv('../input/kidf-kpop-idol-dataset-female/kid_f_train.csv')
-test=pd.read_csv('../input/kidf-kpop-idol-dataset-female/kid_f_test.csv')
+train=pd.read_csv(r'../Idol_data/kid_f_train.csv')
+test=pd.read_csv(r'../Idol_data/kid_f_test.csv')
 
 class_names0=train['name'].unique().tolist()
 tclass_names0=test['name'].unique().tolist()
@@ -44,8 +44,8 @@ reverse_mapping = dict(zip(N, class_names)) # reverse_mapping에 N과 class_name
 train2['name'] = train2['name'].map(normal_mapping) # train2의 name을 normal_mapping으로 매핑
 test2['name'] = test2['name'].map(normal_mapping) # test2의 name을 normal_mapping으로 매핑
 
-train_dir = '../input/kidf-kpop-idol-dataset-female/HQ_512x512/HQ_512x512'
-test_dir = '../input/kidf-kpop-idol-dataset-female/test_final_with_degrad/test/degrad_image' 
+train_dir = r'../Idol_data/HQ_512x512/HQ_512x512'
+test_dir = r'../Idol_data/test_final_with_degrad/test/degrad_image' 
 
 image_files = []
 image_labels=[]
@@ -193,13 +193,9 @@ test_loader = DataLoader(test_ds, batch_size=32, num_workers=2)
 
 device = torch.device("cuda:0")   #"cuda:0"
 
+
 # EfficientNetBN
-model = EfficientNetBN( 
-    "efficientnet-b3",
-    spatial_dims=2,            
-    in_channels=1,
-    num_classes=num_class
-).to(device)
+model = EfficientNetBN("efficientnet-b3",spatial_dims=2, in_channels=1,num_classes=num_class).to(device)
 
 loss_function = torch.nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), 1e-5)
