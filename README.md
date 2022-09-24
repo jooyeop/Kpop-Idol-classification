@@ -97,6 +97,7 @@ print(f"train completed, best_metric: {best_metric:.4f} at epoch: {best_metric_e
 ![Figure_1](https://user-images.githubusercontent.com/97720878/192100943-bf03cd24-a627-46b6-b814-e86308ea2202.png)
 
 ##모델 구축 후 평균 Loss 및 ROC Curve
+
 (좌) Loss (우) ROC Curve
 ![ROC,Loss](https://user-images.githubusercontent.com/97720878/192100969-420aa843-4ac8-4699-9d52-e6caa61438df.png)
 
