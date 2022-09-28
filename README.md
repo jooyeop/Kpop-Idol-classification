@@ -107,6 +107,7 @@ print(f"train completed, best_metric: {best_metric:.4f} at epoch: {best_metric_e
 
 ## 한계점 및 해결 방안
 참고코드를 활용한 프로젝트가 아닌 직접 모델을 구축해보는것이 목표
+
 참고 코드 : https://www.kaggle.com/code/stpeteishii/kpop-idol-classify-monai-pytorch
 
 또한 데이터셋도 직접 구축해보는것이 목표
